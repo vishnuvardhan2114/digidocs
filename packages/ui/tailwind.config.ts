@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        lexend: ["var(--font-lexend)", "sans-serif"],
+        caveat: ["var(--font-caveat)", "cursive"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

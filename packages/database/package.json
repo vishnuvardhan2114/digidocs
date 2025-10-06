@@ -1,0 +1,37 @@
+{
+  "name": "@repo/database",
+  "version": "1.0.0",
+  "description": "Database package with Neon and Drizzle ORM",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./schema": "./dist/schema/index.js",
+    "./connection": "./dist/connection.js",
+    "./migrations": "./dist/migrations/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push",
+    "db:drop": "drizzle-kit drop"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.5",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.29.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.1",
+    "drizzle-kit": "^0.20.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

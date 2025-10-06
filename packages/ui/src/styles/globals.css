@@ -85,14 +85,11 @@
 
   body {
     @apply text-foreground;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgb(var(--background-end-rgb))
-      )
-      rgb(var(--background-start-rgb));
+    background: white;
   }
+
 }
+
 
 .gradient {
   background-image: conic-gradient(
@@ -100,4 +97,37 @@
     rgb(107, 33, 168),
     rgb(55, 48, 163)
   );
+}
+
+
+/* Custom scrollbar that shows on hover */
+.scrollbar-hide-default {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scrollbar-hide-default::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-hide-default::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-hide-default::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.scrollbar-hide-default:hover {
+  scrollbar-color: #30333A transparent;
+}
+
+.scrollbar-hide-default:hover::-webkit-scrollbar-thumb {
+  background-color: #30333A;
+}
+
+.scrollbar-hide-default::-webkit-scrollbar-thumb:hover {
+  background-color: #9095A1;
 }

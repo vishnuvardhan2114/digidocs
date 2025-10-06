@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "eslint": "^9.17.0",
+    "lucide-react": "^0.469.0",
     "next": "^15.1.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.64.0",
     "ui": "workspace:*"
   },
   "devDependencies": {
