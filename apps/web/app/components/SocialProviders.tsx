@@ -13,14 +13,6 @@ export default function SocialProviders({ variant = "sign-in" }: Props) {
         <Image src="/google.svg" alt="" width={18} height={18} />
         <span>Continue with Google</span>
       </button>
-      <button
-        type="button"
-        className="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-400 bg-gray-50 px-4 py-3 text-body-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900/10"
-        aria-label={`${variant === "sign-in" ? "Continue" : "Sign up"} with Apple`}
-      >
-        <Image src="/apple.svg" alt="" width={18} height={18} />
-        <span>Continue with Apple</span>
-      </button>
     </div>
   );
 }

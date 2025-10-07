@@ -91,6 +91,7 @@
 }
 
 
+
 .gradient {
   background-image: conic-gradient(
     rgb(157, 23, 77),
@@ -98,6 +99,8 @@
     rgb(55, 48, 163)
   );
 }
+
+
 
 
 /* Custom scrollbar that shows on hover */
