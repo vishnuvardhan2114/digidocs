@@ -1,6 +1,6 @@
 import React from 'react'
-import AuthForm from '../../components/AuthForm'
-import { signUp } from '../../../lib/auth/actions'
+import AuthForm from '@/app/components/AuthForm'
+import { signUp } from '@/lib/auth/actions'
 
 const SignUpPage = () => {
   
