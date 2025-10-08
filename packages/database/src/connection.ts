@@ -4,7 +4,10 @@ import { config } from "dotenv";
 import * as schema from "./schema";
 import * as relations from "./schema/relations";
 
-config({ path: "../../.env.local" });
+
+if (process.env.NODE_ENV !== 'production') {
+  config({ path: "../../.env.local" });
+}
 
 if (!process.env.DATABASE_URL) {
   throw new Error('DATABASE_URL is not defined');
