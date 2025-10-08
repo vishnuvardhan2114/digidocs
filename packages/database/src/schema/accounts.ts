@@ -12,6 +12,7 @@ export const accounts = pgTable('accounts', {
   refreshTokenExpiresAt: timestamp('refresh_token_expires_at'),
   idToken: text('id_token'),
   password: text('password'),
+  scope: text('scope'), // Required for OAuth providers
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

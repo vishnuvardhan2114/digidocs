@@ -24,8 +24,15 @@ export const auth = betterAuth({
       enabled: true,
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      scope: [
+        "openid",
+        "email",
+        "profile",
+      ],
     },
   },
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3001",
+  secret: process.env.BETTER_AUTH_SECRET || "5wKVm5I7UeSUpXDytycljl0TTthVbCbe",
   sessions: {
     cookieCache: {
       enabled: true,
@@ -38,7 +45,7 @@ export const auth = betterAuth({
       options: {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: 'strict',
+        sameSite: 'lax',
         path: '/',
         maxAge: 60 * 60 * 24 * 7,
       }
@@ -47,6 +54,11 @@ export const auth = betterAuth({
   advanced: {
     database: {
       generateId: () => uuidv4()
+    },
+    // Add CSRF protection configuration
+    csrfProtection: {
+      enabled: true,
+      sameSite: 'lax'
     }
   },
   plugins: [nextCookies()]

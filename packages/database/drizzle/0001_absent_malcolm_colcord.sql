@@ -1,0 +1,1 @@
+ALTER TABLE "service_required_documents" ALTER COLUMN "allowed_file_types" SET DEFAULT ARRAY['pdf','jpg','png'];

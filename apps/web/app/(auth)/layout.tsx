@@ -1,7 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    });
+
+    if (session?.user) {
+        redirect('/');
+    }
+
     return (
         <main className="flex flex-col justify-between lg:flex-row h-screen relative overflow-hidden bg-gray-50">
             <section className="w-full lg:w-[45%] lg:h-screen px-6 lg:px-16 flex flex-col overflow-y-auto scrollbar-hide-default">

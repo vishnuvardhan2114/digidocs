@@ -1,35 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-import SocialProviders from "./SocialProviders";
 import { useRouter } from "next/navigation";
+import SocialProviders from "./SocialProviders";
+import { useAuthStore } from "@/lib/store";
+import { signIn, signUp } from "@/lib/auth/actions";
+import { User } from "@/lib/store";
 
 type Props = {
   mode: "sign-in" | "sign-up";
-  onSubmit: (formData: FormData) => Promise<{ ok: boolean; userId?: string } | void>;
 };
 
-export default function AuthForm({ mode, onSubmit }: Props) {
+export default function AuthForm({ mode }: Props) {
   const [show, setShow] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
+
     const formData = new FormData(e.currentTarget);
-    try {
-      const result = await onSubmit(formData);
-      if (result?.ok) router.push("/");
-    } catch (e) {
-      console.log("error", e);
-    }
+
+    startTransition(async () => {
+      try {
+        const result = mode === "sign-up" 
+          ? await signUp(formData)
+          : await signIn(formData);
+
+        if (result.success && result.user) {
+          // Update Zustand store
+          setUser(result.user as User);
+          
+          // Redirect to dashboard
+          router.push("/");
+          router.refresh();
+        } else {
+          setError(result.error || "Authentication failed");
+        }
+      } catch (err: any) {
+        console.error("Auth error:", err);
+        setError("An unexpected error occurred. Please try again.");
+      }
+    });
   };
 
   return (
     <div className="space-y-6">
       <div className="text-center">
         <p className="text-[14px] leading-[20px] font-medium text-[#757575]">
-          {mode === "sign-in" ? "Don’t have an account? " : "Already have an account? "}
+          {mode === "sign-in" ? "Don't have an account? " : "Already have an account? "}
           <Link
             href={mode === "sign-in" ? "/sign-up" : "/sign-in"}
             className="underline"
@@ -57,6 +80,12 @@ export default function AuthForm({ mode, onSubmit }: Props) {
         <hr className="h-px w-full border-0 bg-[#e5e5e5]" />
       </div>
 
+      {error && (
+        <div className="rounded-lg bg-red-50 border border-red-200 p-3">
+          <p className="text-sm text-red-600">{error}</p>
+        </div>
+      )}
+
       <form className="space-y-4" onSubmit={handleSubmit}>
         {mode === "sign-up" && (
           <div className="space-y-1">
@@ -73,6 +102,8 @@ export default function AuthForm({ mode, onSubmit }: Props) {
               placeholder="Enter your name"
               className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f5] px-4 py-3 text-[16px] leading-[24px] font-normal text-[#111111] placeholder:text-[#757575] focus:outline-none focus:ring-2 focus:ring-[#111111]/10"
               autoComplete="name"
+              required
+              disabled={isPending}
             />
           </div>
         )}
@@ -92,8 +123,32 @@ export default function AuthForm({ mode, onSubmit }: Props) {
             className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f5] px-4 py-3 text-[16px] leading-[24px] font-normal text-[#111111] placeholder:text-[#757575] focus:outline-none focus:ring-2 focus:ring-[#111111]/10"
             autoComplete="email"
             required
+            disabled={isPending}
           />
         </div>
+
+        {mode === "sign-up" && (
+          <div className="space-y-1">
+            <label
+              htmlFor="phone"
+              className="text-[14px] leading-[20px] font-medium text-[#111111]"
+            >
+              Phone Number
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="9874561230"
+              className="w-full rounded-xl border border-[#e5e5e5] bg-[#f5f5f5] px-4 py-3 text-[16px] leading-[24px] font-normal text-[#111111] placeholder:text-[#757575] focus:outline-none focus:ring-2 focus:ring-[#111111]/10"
+              autoComplete="tel"
+              pattern="^(\+?91|91)?[6-9]\d{9}$"
+              title="Enter a valid Indian mobile number (10 digits, starting with 6-9)"
+              required
+              disabled={isPending}
+            />
+          </div>
+        )}
 
         <div className="space-y-1">
           <label
@@ -112,12 +167,14 @@ export default function AuthForm({ mode, onSubmit }: Props) {
               autoComplete={mode === "sign-in" ? "current-password" : "new-password"}
               minLength={8}
               required
+              disabled={isPending}
             />
             <button
               type="button"
-              className="absolute inset-y-0 right-0 px-3 text-[14px] leading-[20px] font-medium text-[#757575]"
+              className="absolute inset-y-0 right-0 px-3 text-[14px] leading-[20px] font-medium text-[#757575] disabled:opacity-50"
               onClick={() => setShow((v) => !v)}
               aria-label={show ? "Hide password" : "Show password"}
+              disabled={isPending}
             >
               {show ? "Hide" : "Show"}
             </button>
@@ -126,9 +183,13 @@ export default function AuthForm({ mode, onSubmit }: Props) {
 
         <button
           type="submit"
-          className="mt-2 w-full rounded-full bg-[#111111] px-6 py-3 text-[16px] leading-[24px] font-medium text-[#ffffff] hover:bg-[#757575] focus:outline-none focus:ring-2 focus:ring-[#111111]/20"
+          className="mt-2 w-full rounded-full bg-[#111111] px-6 py-3 text-[16px] leading-[24px] font-medium text-[#ffffff] hover:bg-[#757575] focus:outline-none focus:ring-2 focus:ring-[#111111]/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          disabled={isPending}
         >
-          {mode === "sign-in" ? "Sign In" : "Sign Up"}
+          {isPending 
+            ? "Loading..." 
+            : mode === "sign-in" ? "Sign In" : "Sign Up"
+          }
         </button>
 
         {mode === "sign-up" && (
