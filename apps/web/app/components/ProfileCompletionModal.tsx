@@ -50,7 +50,7 @@ export default function ProfileCompletionModal() {
       <div className="relative w-full max-w-md mx-4">
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-8 text-white">
+          <div className="px-6 py-8 text-gray-900">
             <div className="flex items-center gap-4 mb-4">
               <div className="h-16 w-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-2xl font-bold">
                 {user.name?.charAt(0).toUpperCase()}
@@ -122,7 +122,7 @@ export default function ProfileCompletionModal() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="w-full rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="w-full rounded-full bg-gray-900 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {isPending ? (
                   <span className="flex items-center justify-center gap-2">

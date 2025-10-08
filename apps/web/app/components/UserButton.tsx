@@ -54,7 +54,7 @@ export default function UserButton() {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 hover:bg-gray-200"
       >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-bold">
+        <div className="h-6 w-6 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-bold">
           {user?.name?.charAt(0).toUpperCase()}
         </div>
         <span className="text-sm font-medium text-gray-900">
