@@ -29,37 +29,15 @@ export default function UserButton() {
     });
   };
 
-  if (!isAuthenticated) {
-    return (
-      <div className="flex items-center gap-3">
-        <a
-          href="/sign-in"
-          className="text-sm font-medium text-gray-700 hover:text-gray-900"
-        >
-          Sign In
-        </a>
-        <a
-          href="/sign-up"
-          className="rounded-full bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
-        >
-          Sign Up
-        </a>
-      </div>
-    );
-  }
-
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 hover:bg-gray-200"
+        className="flex items-center border rounded-full bg-gray-100 px-2 py-2 hover:bg-gray-200"
       >
         <div className="h-6 w-6 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-bold">
           {user?.name?.charAt(0).toUpperCase()}
         </div>
-        <span className="text-sm font-medium text-gray-900">
-          {user?.name}
-        </span>
       </button>
 
       {isOpen && (
