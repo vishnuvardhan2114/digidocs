@@ -1,9 +1,10 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { oneTap } from "better-auth/plugins";
 import { db } from "@repo/database/connection";
 import * as schema from "@repo/database/schema";
 import { v4 as uuidv4 } from "uuid";
-import {nextCookies} from "better-auth/next-js";
+import { nextCookies } from "better-auth/next-js";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -55,11 +56,13 @@ export const auth = betterAuth({
     database: {
       generateId: () => uuidv4()
     },
-    // Add CSRF protection configuration
     csrfProtection: {
       enabled: true,
       sameSite: 'lax'
     }
   },
-  plugins: [nextCookies()]
+  plugins: [
+    nextCookies(),
+    oneTap()  // Add the One Tap plugin
+  ]
 });
