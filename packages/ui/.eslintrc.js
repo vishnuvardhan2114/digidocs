@@ -1,9 +1,26 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   root: true,
-  extends: ["@repo/eslint-config/react-internal.js"],
+  extends: [
+    "eslint:recommended",
+    "prettier",
+  ],
   parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint", "only-warn"],
   parserOptions: {
-    project: "./tsconfig.lint.json",
+    ecmaVersion: "latest",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
+  env: {
+    browser: true,
+    node: true,
+  },
+  globals: {
+    React: true,
+    JSX: true,
+  },
+  ignorePatterns: ["*.config.*", "dist/"],
 };
