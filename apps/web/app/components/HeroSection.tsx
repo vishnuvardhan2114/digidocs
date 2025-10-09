@@ -2,7 +2,7 @@ import React from 'react'
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full min-h-screen bg-gradient-to-t from-blue-200 via-blue-100 to-gray-50">
+    <section className="relative w-full min-h-screen bg-gradient-to-t from-blue-100 via-blue-50 to-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-20">
         {/* Your hero content goes here */}
         <div className="text-center">

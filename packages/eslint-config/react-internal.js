@@ -14,8 +14,20 @@ const project = resolve(process.cwd(), "tsconfig.json");
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["eslint:recommended", "prettier", "eslint-config-turbo"],
-  plugins: ["only-warn"],
+  extends: [
+    "eslint:recommended", 
+    "@typescript-eslint/recommended",
+    "prettier"
+  ],
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint", "only-warn"],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   globals: {
     React: true,
     JSX: true,

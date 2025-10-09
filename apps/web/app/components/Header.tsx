@@ -83,11 +83,14 @@ const Header = () => {
                             </>
                         ) : (
                             <>
-                                <NavbarButton variant="secondary" onClick={handleNavigateToLogin} className="rounded-full">
+                                <NavbarButton variant="secondary" onClick={handleNavigateToLogin} className="rounded-full font-semibold">
                                     Login
                                 </NavbarButton>
-                                <NavbarButton variant="primary" onClick={handleGetStartedClick} className="rounded-full">
+                                <NavbarButton
+                                    className="rounded-full flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium shadow-md transition-colors"
+                                    variant="primary" onClick={handleGetStartedClick}>
                                     Get Started
+                                    <ArrowUpRight className="w-4 h-4" />
                                 </NavbarButton>
                             </>
                         )}
@@ -124,9 +127,10 @@ const Header = () => {
                                 <NavbarButton
                                     onClick={handleGetStartedClick}
                                     variant="primary"
-                                    className="w-full rounded-full"
+                                    className="rounded-full flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium shadow-md transition-colors"
                                 >
                                     Get Started
+                                    <ArrowUpRight className="w-4 h-4" />
                                 </NavbarButton>
                             </div>
                         ) : (
@@ -134,16 +138,17 @@ const Header = () => {
                                 <NavbarButton
                                     onClick={handleMobileLoginClick}
                                     variant="primary"
-                                    className="w-full rounded-full"
+                                    className="w-full rounded-full font-semibold"
                                 >
                                     Login
                                 </NavbarButton>
                                 <NavbarButton
                                     onClick={handleGetStartedClick}
                                     variant="primary"
-                                    className="w-full rounded-full"
+                                    className="rounded-full flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium shadow-md transition-colors"
                                 >
                                     Get Started
+                                    <ArrowUpRight className="w-4 h-4" />
                                 </NavbarButton>
                             </div>
                         )}
