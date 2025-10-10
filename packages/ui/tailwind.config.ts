@@ -8,7 +8,21 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     '../../packages/ui/src/components/**/*.{ts,tsx}',
+    '../../apps/web/**/*.{ts,tsx}',
+    '../../apps/web/constants/**/*.{ts,tsx}',
 	],
+  safelist: [
+    // Icon background colors
+    'bg-blue-100',
+    'bg-green-100', 
+    'bg-orange-100',
+    'bg-purple-100',
+    // Icon text colors
+    'text-blue-600',
+    'text-green-600',
+    'text-orange-600', 
+    'text-purple-600',
+  ],
   theme: {
     container: {
       center: true,
@@ -71,10 +85,20 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height:"0" },
         },
+        "marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "marquee": "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
     },
   },

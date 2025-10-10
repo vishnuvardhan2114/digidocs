@@ -63,7 +63,7 @@ const Header = () => {
         // TODO: Add navigation route when available
     }, [handleCloseMobileMenu]);
     return (
-        <div className="fixed top-4 left-0 right-0 w-full max-w-7xl mx-auto z-50 px-4">
+        <div className="md:fixed md:top-4 md:left-0 md:right-0 w-full max-w-7xl mx-auto z-50 px-4">
             <Navbar className="">
                 {/* Desktop Navigation */}
                 <NavBody>
@@ -74,7 +74,7 @@ const Header = () => {
                             <>
                                 <UserButton />
                                 <NavbarButton
-                                    className="rounded-full flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium shadow-md transition-colors"
+                                    className="rounded-full flex items-center gap-2 bg-[#1E88E5] hover:bg-[#1565C0] text-white font-medium shadow-md transition-colors"
                                     variant="primary"
                                     onClick={handleGetStartedClick}
                                 >
