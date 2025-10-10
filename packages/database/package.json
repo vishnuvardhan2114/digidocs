@@ -14,15 +14,15 @@
         "build": "tsc",
         "dev": "tsc --watch",
         "db:generate": "drizzle-kit generate",
-        "db:migrate": "drizzle-kit up:pg",
+        "db:migrate": "drizzle-kit migrate",
         "db:studio": "drizzle-kit studio",
-        "db:push": "drizzle-kit push:pg",
+        "db:push": "drizzle-kit push",
         "db:drop": "drizzle-kit drop"
     },
     "dependencies": {
         "@neondatabase/serverless": "^0.9.5",
         "dotenv": "^16.4.5",
-        "drizzle-orm": "^0.34.0",
+        "drizzle-orm": "^0.36.0",
         "pg": "^8.16.3",
         "typescript": "^5.7.2",
         "ws": "^8.18.3"
@@ -30,7 +30,7 @@
     "devDependencies": {
         "@types/pg": "^8.15.5",
         "@types/ws": "^8.18.1",
-        "drizzle-kit": "^0.24.0",
+        "drizzle-kit": "^0.28.0",
         "tsx": "^4.7.0"
     },
     "peerDependencies": {
