@@ -22,7 +22,7 @@
     "dependencies": {
         "@neondatabase/serverless": "^0.9.5",
         "dotenv": "^16.4.5",
-        "drizzle-orm": "^0.35.0",
+        "drizzle-orm": "^0.36.0",
         "pg": "^8.16.3",
         "typescript": "^5.7.2",
         "ws": "^8.18.3"
@@ -30,7 +30,7 @@
     "devDependencies": {
         "@types/pg": "^8.15.5",
         "@types/ws": "^8.18.1",
-        "drizzle-kit": "^0.27.0",
+        "drizzle-kit": "^0.28.0",
         "tsx": "^4.7.0"
     },
     "peerDependencies": {
