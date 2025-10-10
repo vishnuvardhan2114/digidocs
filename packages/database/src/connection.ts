@@ -21,6 +21,7 @@ function getDatabase() {
 
   const sql = neon(process.env.DATABASE_URL);
 
+  // Correct syntax for newer drizzle-orm versions
   _db = drizzle(sql, {
     schema: {
       ...schema,
