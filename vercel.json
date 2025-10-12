@@ -1,4 +1,6 @@
 {
-    "buildCommand": "cd ../.. && pnpm install && pnpm turbo run build --filter=web...",
-    "installCommand": "cd ../.. && pnpm install"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm turbo run build --filter=web...",
+  "installCommand": "pnpm install",
+  "framework": null
 }
