@@ -5,7 +5,7 @@ name = "digidocs"
 compatibility_date = "2024-01-01"
 
 # Pages-specific configuration
-pages_build_output_dir = ".vercel/output/static"
+pages_build_output_dir = ".open-next"
 
 # Environment variables can be set in Cloudflare Dashboard
 # This file should NOT contain secrets

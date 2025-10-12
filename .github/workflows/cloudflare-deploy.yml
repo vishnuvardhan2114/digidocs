@@ -66,7 +66,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: digidocs
-          directory: apps/web/.vercel/output/static
+          directory: apps/web/.open-next
           # Optional: Enable if you want to use Git branch for deployment
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           # Optional: Environment for preview deployments
