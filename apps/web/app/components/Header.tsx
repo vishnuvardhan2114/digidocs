@@ -38,7 +38,7 @@ const Header = () => {
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, isLoading } = useAuth();
 
     // Memoized handlers
     const handleMobileMenuToggle = useCallback(() => {
@@ -63,18 +63,24 @@ const Header = () => {
         // TODO: Add navigation route when available
     }, [handleCloseMobileMenu]);
     return (
-        <div className="fixed top-4 left-0 right-0 w-full max-w-7xl mx-auto z-50 px-4">
+        <div className="md:fixed md:top-4 md:left-0 md:right-0 w-full max-w-7xl mx-auto z-50 px-4">
             <Navbar className="">
                 {/* Desktop Navigation */}
                 <NavBody>
                     <NavbarLogo />
                     <NavItems items={navItems} />
                     <div className="flex items-center gap-4">
-                        {isAuthenticated ? (
+                        {isLoading ? (
+                            // Loading skeleton
+                            <div className="flex items-center gap-4">
+                                <div className="w-20 h-10 bg-gray-200 rounded-full animate-pulse" />
+                                <div className="w-32 h-10 bg-gray-200 rounded-full animate-pulse" />
+                            </div>
+                        ) : isAuthenticated ? (
                             <>
                                 <UserButton />
                                 <NavbarButton
-                                    className="rounded-full flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium shadow-md transition-colors"
+                                    className="rounded-full flex items-center gap-2 bg-[#1E88E5] hover:bg-[#1565C0] text-white font-medium shadow-md transition-colors"
                                     variant="primary"
                                     onClick={handleGetStartedClick}
                                 >
@@ -121,7 +127,13 @@ const Header = () => {
                                 <span className="block">{item.name}</span>
                             </a>
                         ))}
-                        {isAuthenticated ? (
+                        {isLoading ? (
+                            // Mobile loading skeleton
+                            <div className="flex w-full flex-col gap-4 pt-4">
+                                <div className="w-full h-10 bg-gray-200 rounded-full animate-pulse" />
+                                <div className="w-full h-10 bg-gray-200 rounded-full animate-pulse" />
+                            </div>
+                        ) : isAuthenticated ? (
                             <div className="flex w-full justify-center pt-4">
                                 <UserButton />
                                 <NavbarButton

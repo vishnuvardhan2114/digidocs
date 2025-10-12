@@ -16,16 +16,18 @@ export function useAuth(options: UseAuthOptions = {}) {
   
   const user = useAuthStore((state) => state.user);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isLoading = useAuthStore((state) => state.isLoading);
 
   useEffect(() => {
-    if (requireAuth && !isAuthenticated) {
+    if (requireAuth && !isAuthenticated && !isLoading) {
       router.push(redirectTo);
     }
-  }, [requireAuth, isAuthenticated, redirectTo, router]);
+  }, [requireAuth, isAuthenticated, isLoading, redirectTo, router]);
 
   return {
     user,
     isAuthenticated,
+    isLoading,
     isGuest: !isAuthenticated,
   };
 }
