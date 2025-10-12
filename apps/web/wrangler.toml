@@ -10,14 +10,5 @@ pages_build_output_dir = ".open-next"
 # Node.js compatibility for Next.js server functions
 compatibility_flags = ["nodejs_compat"]
 
-# Optional build section
-[build]
-# No need to define a custom command — Cloudflare already runs your build command from the dashboard
-command = ""
-cwd = ""
-
-[build.upload]
-format = "service-worker"
-
 # Environment variables (only non-secret values here)
 # Secrets must be set in Cloudflare Dashboard → Settings → Environment Variables
