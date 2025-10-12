@@ -43,7 +43,7 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2",
-    "vercel": "^48.2.9",
+    "vercel": "^47.0.4",
     "wrangler": "^4.42.2"
   }
 }
