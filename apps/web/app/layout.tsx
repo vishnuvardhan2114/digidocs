@@ -25,6 +25,7 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "DigiDocs",
   description: "Digital document management platform",
+  metadataBase: new URL(process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'http://localhost:3001'),
 };
 
 export default function RootLayout({

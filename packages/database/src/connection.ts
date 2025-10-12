@@ -15,6 +15,12 @@ let _db: ReturnType<typeof drizzle> | null = null;
 function getDatabase() {
   if (_db) return _db;
 
+  // Skip database initialization during build
+  if (typeof window === 'undefined' && process.env.VERCEL_ENV === undefined && !process.env.DATABASE_URL) {
+    console.warn("Skipping database initialization during build");
+    return {} as ReturnType<typeof drizzle>;
+  }
+
   if (!process.env.DATABASE_URL) {
     throw new Error("DATABASE_URL is not defined");
   }

@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["ui", "@repo/database"],
+  serverExternalPackages: ['@neondatabase/serverless', 'ws'],
+  outputFileTracingRoot: require('path').join(__dirname, '../../'),
   images: {
     remotePatterns: [
       {
@@ -18,6 +20,12 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = [...(config.externals || []), '@neondatabase/serverless', 'ws'];
+    }
+    return config;
   },
 };
 
