@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { oneTap } from "better-auth/plugins";
 import { db } from "@repo/database/connection";
 import * as schema from "@repo/database/schema";
 import { v4 as uuidv4 } from "uuid";
@@ -61,6 +62,7 @@ export const auth = betterAuth({
     }
   },
   plugins: [
-    nextCookies()
+    nextCookies(),
+    oneTap()  // Add the One Tap plugin
   ]
 });
