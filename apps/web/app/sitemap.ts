@@ -4,7 +4,7 @@ import { SERVICES } from '@/constants/popular-services.constants'
 // Updated for Cloudflare Pages deployment
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://digidocs.com'
+  const baseUrl = 'https://digidocsindia.com'
   
   // Static pages
   const staticPages = [
