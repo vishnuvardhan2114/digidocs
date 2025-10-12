@@ -4,13 +4,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ServiceCategoryChip } from './ServiceCategoryChip'
 import { PopularServiceCard } from './PopularServiceCard'
-import { 
-  SERVICE_CATEGORIES, 
-  POPULAR_SERVICES as SERVICES, 
+import {
+  SERVICE_CATEGORIES,
+  POPULAR_SERVICES as SERVICES,
   POPULAR_SERVICES_CONTENT,
   type ServiceCategory,
 } from '@/constants'
 import { Button } from '@ui/components/ui/button'
+import { Skeleton } from '@ui/components/ui/skeleton'
+import { useRouter } from 'next/navigation'
 
 const useServiceAnimations = (isVisible: boolean) => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -18,14 +20,13 @@ const useServiceAnimations = (isVisible: boolean) => {
 
   useEffect(() => {
     if (!isVisible || !containerRef.current) return
-
     const cards = cardsRef.current.filter(Boolean)
-    
+
     // Initial state
-    gsap.set(cards, { 
-      opacity: 0, 
-      y: 50, 
-      scale: 0.95 
+    gsap.set(cards, {
+      opacity: 0,
+      y: 50,
+      scale: 0.95
     })
 
     // Animate in
@@ -45,6 +46,36 @@ const useServiceAnimations = (isVisible: boolean) => {
 
   return { containerRef, cardsRef }
 }
+
+// Skeleton component for loading state
+const ServiceCardSkeleton = () => (
+  <div className="cursor-pointer group">
+    {/* Image Card */}
+    <div className="relative h-60 overflow-hidden rounded-xl">
+      <Skeleton className="w-full h-full" />
+
+      {/* Flag Icon Overlay Skeleton */}
+      <div className="absolute top-3 right-3 w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center shadow-md">
+        <Skeleton className="w-6 h-6 rounded-full" />
+      </div>
+    </div>
+
+    {/* Content Below Image */}
+    <div className="mt-3">
+      {/* Title and Rating Row */}
+      <div className="flex items-center justify-between mb-1">
+        <Skeleton className="h-4 w-24" />
+        <div className="flex items-center gap-1">
+          <Skeleton className="w-4 h-4 rounded" />
+          <Skeleton className="h-4 w-6" />
+        </div>
+      </div>
+
+      {/* Description */}
+      <Skeleton className="h-4 w-full" />
+    </div>
+  </div>
+)
 
 const useCarousel = (items: any[], itemsPerView: number) => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -79,7 +110,7 @@ const useCarousel = (items: any[], itemsPerView: number) => {
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return
-    
+
     const distance = touchStart - touchEnd
     const isLeftSwipe = distance > 75 // Swipe left to go next
     const isRightSwipe = distance < -75 // Swipe right to go previous
@@ -108,13 +139,23 @@ const useCarousel = (items: any[], itemsPerView: number) => {
   }
 }
 
+interface PopularServicesProps {
+  showAllChip?: boolean
+}
 
-const PopularServices = () => {
-  const [categories, setCategories] = useState<ServiceCategory[]>(SERVICE_CATEGORIES)
+const PopularServices = ({ showAllChip = false }: PopularServicesProps) => {
+  const [isLoading, setIsLoading] = useState(true)
+  const [categories, setCategories] = useState<ServiceCategory[]>(() => {
+    const filteredCategories = showAllChip ? SERVICE_CATEGORIES : SERVICE_CATEGORIES.filter(cat => cat.id !== 'all')
+    return filteredCategories.map((cat, index) => ({
+      ...cat,
+      isActive: index === 0
+    }))
+  })
   const [selectedCategory, setSelectedCategory] = useState('personal')
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-
+  const router = useRouter()
   // Get filtered services based on selected category
   const filteredServices = SERVICES.filter(service => service.category === selectedCategory)
 
@@ -124,10 +165,19 @@ const PopularServices = () => {
     handleTouchStart,
     handleTouchMove,
     handleTouchEnd
-  } = useCarousel(filteredServices, 1) 
+  } = useCarousel(filteredServices, 1)
 
   // GSAP animations
   const { containerRef, cardsRef } = useServiceAnimations(isVisible)
+
+  // Simulate loading state (you can replace this with actual data fetching)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000) // Simulate 1 second loading time
+
+    return () => clearTimeout(timer)
+  }, [selectedCategory])
 
   // Intersection Observer for animations
   useEffect(() => {
@@ -149,8 +199,10 @@ const PopularServices = () => {
   }, [])
 
   const handleCategoryClick = (categoryId: string) => {
+    // Set loading state when changing category
+    setIsLoading(true)
     // Update categories with new active state
-    setCategories(prev => 
+    setCategories(prev =>
       prev.map(cat => ({
         ...cat,
         isActive: cat.id === categoryId
@@ -161,7 +213,7 @@ const PopularServices = () => {
 
   const handleServiceClick = (serviceId: string) => {
     console.log(`Service clicked: ${serviceId}`)
-    // TODO: Navigate to service page
+    router.push(`/services/${serviceId}`)
   }
 
   const handleBrowseAllClick = () => {
@@ -195,54 +247,79 @@ const PopularServices = () => {
 
         {/* Services Grid/Carousel */}
         <div ref={containerRef} className="relative">
-          {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredServices.slice(0, 8).map((service, index) => (
-              <div
-                key={service.id}
-                ref={el => {
-                  if (el) cardsRef.current[index] = el
-                }}
-              >
-                <PopularServiceCard
-                  service={service}
-                  onClick={handleServiceClick}
-                />
+          {isLoading ? (
+            <>
+              {/* Desktop Skeleton Grid */}
+              <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {Array.from({ length: 4 }).map((_, index) => (
+                  <ServiceCardSkeleton key={`skeleton-desktop-${index}`} />
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Mobile Carousel - Show current card with peek of next card */}
-          <div className="md:hidden">
-            <div 
-              className="relative overflow-hidden "
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              <div 
-                className="flex transition-transform duration-300 ease-in-out"
-                style={{
-                  transform: `translateX(-${currentIndex * 85}%)`,
-                }}
-              >
-                {filteredServices.map((service, index) => (
-                  <div key={service.id} className="w-[85%] flex-shrink-0 pr-4">
-                    <div
-                      ref={el => {
-                        if (el) cardsRef.current[index] = el
-                      }}
-                    >
-                      <PopularServiceCard
-                        service={service}
-                        onClick={handleServiceClick}
-                      />
-                    </div>
+              {/* Mobile Skeleton */}
+              <div className="md:hidden">
+                <div className="flex gap-4 overflow-hidden">
+                  <div className="w-[85%] flex-shrink-0">
+                    <ServiceCardSkeleton />
+                  </div>
+                  <div className="w-[85%] flex-shrink-0">
+                    <ServiceCardSkeleton />
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Desktop Grid */}
+              <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {filteredServices.slice(0, 8).map((service, index) => (
+                  <div
+                    key={service.id}
+                    ref={el => {
+                      if (el) cardsRef.current[index] = el
+                    }}
+                  >
+                    <PopularServiceCard
+                      service={service}
+                      onClick={handleServiceClick}
+                    />
                   </div>
                 ))}
               </div>
-            </div>            
-          </div>
+
+              {/* Mobile Carousel - Show current card with peek of next card */}
+              <div className="md:hidden">
+                <div
+                  className="relative overflow-hidden "
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                >
+                  <div
+                    className="flex transition-transform duration-300 ease-in-out"
+                    style={{
+                      transform: `translateX(-${currentIndex * 85}%)`,
+                    }}
+                  >
+                    {filteredServices.map((service, index) => (
+                      <div key={service.id} className="w-[85%] flex-shrink-0 pr-4">
+                        <div
+                          ref={el => {
+                            if (el) cardsRef.current[index] = el
+                          }}
+                        >
+                          <PopularServiceCard
+                            service={service}
+                            onClick={handleServiceClick}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* CTA Button */}

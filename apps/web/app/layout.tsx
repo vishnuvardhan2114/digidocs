@@ -3,7 +3,12 @@ import type { Metadata } from "next";
 import { Lexend, Caveat } from "next/font/google";
 import { Toaster } from "@ui/components/ui/sonner";
 import { AuthSyncProvider } from "@/providers/auth-sync-provider";
+import { BreadcrumbProvider } from "@/app/components/BreadcrumbProvider";
 import ProfileCompletionModal from "@/app/components/ProfileCompletionModal";
+import OneTap from "./components/OneTap";
+import ConditionalHeader from "./components/ConditionalHeader";
+import AppBreadcrumb from "./components/AppBreadcrumb";
+import ConditionalFooter from "./components/ConditionalFooter";
 
 const lexend = Lexend({ 
   subsets: ["latin"],
@@ -31,8 +36,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${lexend.variable} ${caveat.variable} font-lexend bg-gray-50 min-h-screen`} suppressHydrationWarning>
         <AuthSyncProvider>
-          {children}
-          <ProfileCompletionModal />
+          <BreadcrumbProvider>
+            <OneTap />
+            <ConditionalHeader />
+            <AppBreadcrumb />
+            {children}
+            <ProfileCompletionModal />
+            <ConditionalFooter />
+          </BreadcrumbProvider>
         </AuthSyncProvider>
         <Toaster />
       </body>

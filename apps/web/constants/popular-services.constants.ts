@@ -15,7 +15,8 @@ export interface Service {
 }
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
-  { id: 'personal', name: 'Personal Docs', isActive: true },
+  { id: 'all', name: 'Show all', isActive: true },
+  { id: 'personal', name: 'Personal Docs', isActive: false },
   { id: 'general', name: 'General Docs', isActive: false },
   { id: 'financial', name: 'Financial Docs', isActive: false },
   { id: 'legal', name: 'Legal Docs', isActive: false },
@@ -176,7 +177,12 @@ export const SERVICES: Service[] = [
 ]
 
 export const POPULAR_SERVICES_CONTENT = {
-  heading: 'Our Popular Services',
-  description: 'Browse all document services available to you with complete support and guidance!',
+  heading: 'Digital Documents & Remote Services',
+  description: 'Digital Documents & Remote Services allow you to manage your important documents and services online with complete support and guidance. These services are designed to save your time and provide convenience. Browse all document services available to you!',
   ctaButton: 'Browse All Services',
+} as const
+
+export const SERVICES_PAGE_CONTENT = {
+  heading: 'Digital Documents & Remote Services',
+  description: 'Manage your important documents and services online with complete support and guidance. These services are designed to save your time and provide convenience. Browse all document services available to you around the world!',
 } as const

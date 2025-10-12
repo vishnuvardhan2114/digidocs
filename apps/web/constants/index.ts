@@ -8,11 +8,23 @@ export * from './why-choose-us.constants'
 export { 
   SERVICE_CATEGORIES, 
   POPULAR_SERVICES_CONTENT,
-  SERVICES as POPULAR_SERVICES 
+  SERVICES_PAGE_CONTENT,
+  SERVICES as POPULAR_SERVICES,
+  SERVICES
 } from './popular-services.constants'
 
+// Service Details Constants
+export {
+  SERVICE_OPTIONS,
+  SERVICE_DETAILS,
+  getServiceDetails,
+  getServiceOptions,
+  getEstimatedDeliveryDate
+} from './service-details.constants'
+
 // Export types
-export type { Service, BadgeData } from './hero-section.constants'
+export type { Service as HeroService, BadgeData } from './hero-section.constants'
 export type { ProcessStep } from './why-choose-us.constants'
 export type { ServiceCategory, Service as PopularService } from './popular-services.constants'
+export type { ServiceDetails, ServiceOption } from './service-details.constants'
 

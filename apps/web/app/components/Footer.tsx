@@ -73,14 +73,14 @@ const Footer = () => {
                         <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Company</h3>
                         <ul className="space-y-3">
                             {[
-                                "About Us",
-                                "Contact Us",
-                                "Privacy Policy",
-                                "Terms of Service"
+                                { name: "About Us", href: "#" },
+                                { name: "Contact Us", href: "#" },
+                                { name: "Privacy Policy", href: "/privacy-policy" },
+                                { name: "Terms of Service", href: "/terms-of-use" }
                             ].map((item) => (
-                                <li key={item}>
-                                    <Link href="#" className="text-gray-600 text-sm hover:text-gray-900 underline transition-colors">
-                                        {item}
+                                <li key={item.name}>
+                                    <Link href={item.href} className="text-gray-600 text-sm hover:text-gray-900 underline transition-colors">
+                                        {item.name}
                                     </Link>
                                 </li>
                             ))}
@@ -116,20 +116,17 @@ const Footer = () => {
                             Copyright © 2025 DigiDocs. All rights reserved.
                         </div>
                         <div className="flex flex-wrap items-center space-x-6 text-sm">
-                            <Link href="#" className="text-gray-500 hover:text-gray-700 transition-colors">
+                            <Link href="/privacy-policy" className="text-gray-500 hover:text-gray-700 transition-colors">
                                 Privacy Policy
                             </Link>
-                            <Link href="#" className="text-gray-500 hover:text-gray-700 transition-colors">
+                            <Link href="/terms-of-use" className="text-gray-500 hover:text-gray-700 transition-colors">
                                 Terms of Use
                             </Link>
                             <Link href="#" className="text-gray-500 hover:text-gray-700 transition-colors">
                                 Disclaimer
                             </Link>
-                            <Link href="#" className="text-gray-500 hover:text-gray-700 transition-colors">
+                            <Link href="/cookie-policy" className="text-gray-500 hover:text-gray-700 transition-colors">
                                 Cookie Policy
-                            </Link>
-                            <Link href="#" className="text-gray-500 hover:text-gray-700 transition-colors">
-                                EULA
                             </Link>
                         </div>
                     </div>

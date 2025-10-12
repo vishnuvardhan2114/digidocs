@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { useRef } from 'react'
 import ServiceCard from './ServiceCard'
 import { useFloatingBadgeAnimation } from '@/hooks/useFloatingBadgeAnimation'
-import { SERVICES, HERO_CONTENT, IMAGES } from '@/constants'
+import { SERVICES, HERO_CONTENT, IMAGES } from '@/constants/hero-section.constants'
 
 const HeroSection = () => {
   const badgeRefs = [

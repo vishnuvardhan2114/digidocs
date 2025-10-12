@@ -7,9 +7,10 @@ import type { Service } from '@/constants/popular-services.constants'
 interface PopularServiceCardProps {
   service: Service
   onClick?: (serviceId: string) => void
+  priority?: boolean
 }
 
-export const PopularServiceCard = ({ service, onClick }: PopularServiceCardProps) => {
+export const PopularServiceCard = ({ service, onClick, priority = false }: PopularServiceCardProps) => {
   const handleClick = () => {
     onClick?.(service.id)
   }
@@ -23,6 +24,7 @@ export const PopularServiceCard = ({ service, onClick }: PopularServiceCardProps
           src={service.imageUrl}
           alt={service.name}
           className="object-cover group-hover:scale-105 transition-transform duration-300"
+          priority={priority}
         />
         
         {/* Flag Icon Overlay */}

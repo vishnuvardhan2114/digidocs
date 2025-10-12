@@ -6,9 +6,10 @@ interface ServiceImageProps {
   alt: string
   className?: string
   fill?: boolean
+  priority?: boolean
 }
 
-export const ServiceImage = ({ src, alt, className, fill = true }: ServiceImageProps) => {
+export const ServiceImage = ({ src, alt, className, fill = true, priority = false }: ServiceImageProps) => {
   const [hasError, setHasError] = useState(false)
 
   if (hasError) {
@@ -19,6 +20,7 @@ export const ServiceImage = ({ src, alt, className, fill = true }: ServiceImageP
         fill={fill}
         className={className}
         style={{ objectFit: 'cover' }}
+        priority={priority}
       />
     )
   }
@@ -30,6 +32,7 @@ export const ServiceImage = ({ src, alt, className, fill = true }: ServiceImageP
       fill={fill}
       className={className}
       onError={() => setHasError(true)}
+      priority={priority}
     />
   )
 }

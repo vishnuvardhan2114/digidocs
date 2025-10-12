@@ -38,7 +38,7 @@ const Header = () => {
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, isLoading } = useAuth();
 
     // Memoized handlers
     const handleMobileMenuToggle = useCallback(() => {
@@ -70,7 +70,13 @@ const Header = () => {
                     <NavbarLogo />
                     <NavItems items={navItems} />
                     <div className="flex items-center gap-4">
-                        {isAuthenticated ? (
+                        {isLoading ? (
+                            // Loading skeleton
+                            <div className="flex items-center gap-4">
+                                <div className="w-20 h-10 bg-gray-200 rounded-full animate-pulse" />
+                                <div className="w-32 h-10 bg-gray-200 rounded-full animate-pulse" />
+                            </div>
+                        ) : isAuthenticated ? (
                             <>
                                 <UserButton />
                                 <NavbarButton
@@ -121,7 +127,13 @@ const Header = () => {
                                 <span className="block">{item.name}</span>
                             </a>
                         ))}
-                        {isAuthenticated ? (
+                        {isLoading ? (
+                            // Mobile loading skeleton
+                            <div className="flex w-full flex-col gap-4 pt-4">
+                                <div className="w-full h-10 bg-gray-200 rounded-full animate-pulse" />
+                                <div className="w-full h-10 bg-gray-200 rounded-full animate-pulse" />
+                            </div>
+                        ) : isAuthenticated ? (
                             <div className="flex w-full justify-center pt-4">
                                 <UserButton />
                                 <NavbarButton

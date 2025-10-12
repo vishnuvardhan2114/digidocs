@@ -113,7 +113,6 @@ const CommunitySection = () => {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         )
