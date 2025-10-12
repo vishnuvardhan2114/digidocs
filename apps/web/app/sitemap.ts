@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next'
 import { SERVICES } from '@/constants/popular-services.constants'
 
+// Required for static export
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://digidocs.com'
   
