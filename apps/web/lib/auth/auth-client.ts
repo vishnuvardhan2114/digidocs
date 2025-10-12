@@ -3,13 +3,12 @@ import { createAuthClient } from "better-auth/react";
 import { nextCookies } from "better-auth/next-js";
 import { oneTapClient } from "better-auth/client/plugins";
 
-const plugins: any[] = [nextCookies()];
-
-// Only add oneTapClient if Google Client ID is available
-if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID) {
-  plugins.push(
+export const authClient = createAuthClient({
+  baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3001",
+  plugins: [
+    nextCookies(),
     oneTapClient({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
       autoSelect: false,
       cancelOnTapOutside: true,
       context: "signin",
@@ -23,12 +22,7 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID) {
         maxAttempts: 3
       }
     })
-  );
-}
-
-export const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3001",
-  plugins,
+  ],
 });
 
 export const { 
