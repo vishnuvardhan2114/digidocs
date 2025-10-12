@@ -3,10 +3,12 @@ name: Deploy to Cloudflare Pages
 on:
   push:
     branches:
+      - vishnu
       - main
       - master
   pull_request:
     branches:
+      - vishnu
       - main
       - master
 
@@ -48,7 +50,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm turbo run build --filter=web...
+        run: pnpm build:cloudflare
         env:
           NODE_ENV: production
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -64,7 +66,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: digidocs
-          directory: apps/web/.next
+          directory: apps/web/.vercel/output/static
           # Optional: Enable if you want to use Git branch for deployment
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           # Optional: Environment for preview deployments
