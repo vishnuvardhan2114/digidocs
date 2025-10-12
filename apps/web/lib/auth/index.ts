@@ -62,7 +62,5 @@ export const auth = betterAuth({
   },
   plugins: [
     nextCookies()
-    // Note: oneTap plugin removed to prevent SSG build errors
-    // Google One Tap is handled client-side in OneTap.tsx component
   ]
 });
