@@ -9,7 +9,12 @@ const nextConfig = {
   transpilePackages: ["ui", "@repo/database"],
   serverExternalPackages: ['@neondatabase/serverless', 'ws'],
   outputFileTracingRoot: path.join(__dirname, '../../'),
+  output: 'export',
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  distDir: '.next',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
