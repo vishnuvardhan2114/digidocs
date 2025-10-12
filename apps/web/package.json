@@ -40,7 +40,7 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "typescript": "^5.7.2",
-    "vercel": "^48.2.9",
+    "vercel": "^47.0.4",
     "wrangler": "^4.42.2"
   }
 }
