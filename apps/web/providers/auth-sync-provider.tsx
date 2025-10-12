@@ -8,10 +8,12 @@ import { User } from '@/lib/store';
 export function AuthSyncProvider({ children }: { children: React.ReactNode }) {
   const setUser = useAuthStore((state) => state.setUser);
   const clearUser = useAuthStore((state) => state.clearUser);
+  const setLoading = useAuthStore((state) => state.setLoading);
   const setShowProfileModal = useUIStore((state) => state.setShowProfileCompletionModal);
 
   useEffect(() => {
     const syncSession = async () => {
+      setLoading(true);
       try {
         const { user } = await getSession();
 
@@ -37,7 +39,7 @@ export function AuthSyncProvider({ children }: { children: React.ReactNode }) {
     };
 
     syncSession();
-  }, [setUser, clearUser, setShowProfileModal]);
+  }, [setUser, clearUser, setLoading, setShowProfileModal]);
 
   return <>{children}</>;
 }

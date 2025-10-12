@@ -3,7 +3,12 @@ import type { Metadata } from "next";
 import { Lexend, Caveat } from "next/font/google";
 import { Toaster } from "@ui/components/ui/sonner";
 import { AuthSyncProvider } from "@/providers/auth-sync-provider";
+import { BreadcrumbProvider } from "@/app/components/BreadcrumbProvider";
 import ProfileCompletionModal from "@/app/components/ProfileCompletionModal";
+import OneTap from "./components/OneTap";
+import ConditionalHeader from "./components/ConditionalHeader";
+import AppBreadcrumb from "./components/AppBreadcrumb";
+import ConditionalFooter from "./components/ConditionalFooter";
 
 const lexend = Lexend({ 
   subsets: ["latin"],
@@ -20,6 +25,7 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "DigiDocs",
   description: "Digital document management platform",
+  metadataBase: new URL(process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'http://localhost:3001'),
 };
 
 export default function RootLayout({
@@ -31,8 +37,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${lexend.variable} ${caveat.variable} font-lexend bg-gray-50 min-h-screen`} suppressHydrationWarning>
         <AuthSyncProvider>
-          {children}
-          <ProfileCompletionModal />
+          <BreadcrumbProvider>
+            <OneTap />
+            <ConditionalHeader />
+            <AppBreadcrumb />
+            {children}
+            <ProfileCompletionModal />
+            <ConditionalFooter />
+          </BreadcrumbProvider>
         </AuthSyncProvider>
         <Toaster />
       </body>
