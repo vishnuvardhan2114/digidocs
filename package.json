@@ -5,7 +5,7 @@
    "license": "MIT",
    "scripts": {
       "build": "turbo build",
-      "build:cloudflare": "pnpm --filter @repo/database build && pnpm --filter web build && cd apps/web && npx open-next@latest build --platform cloudflare",
+      "build:cloudflare": "pnpm --filter @repo/database build && pnpm --filter web build && cd apps/web && npx @cloudflare/next-on-pages",
       "dev": "turbo dev",
       "lint": "turbo lint",
       "format": "prettier --write \"**/*.{ts,tsx,md}\""
