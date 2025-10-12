@@ -20,7 +20,7 @@
         "db:drop": "drizzle-kit drop"
     },
     "dependencies": {
-        "@neondatabase/serverless": "^0.9.5",
+        "@neondatabase/serverless": "^1.0.2",
         "dotenv": "^16.4.5",
         "drizzle-orm": "^0.36.0",
         "pg": "^8.16.3",
