@@ -14,7 +14,7 @@ export async function createZohoLead(user: User) {
 
     // Dynamic import to avoid webpack bundling issues
     const { ZohoHTTPClient } = await import("@repo/zoho-crm");
-    const leadService = await ZohoHTTPClient();
+    const leadService = await ZohoHTTPClient.create();
 
     const leadData = {
       firstName: user.name?.split(" ")[0] || "User",
