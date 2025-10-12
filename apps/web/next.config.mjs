@@ -6,7 +6,8 @@ const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  output: 'export',
+  trailingSlash: true,
   transpilePackages: ["ui", "@repo/database"],
   serverExternalPackages: ['@neondatabase/serverless', 'ws'],
   outputFileTracingRoot: path.join(__dirname, '../../'),
