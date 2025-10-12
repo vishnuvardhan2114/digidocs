@@ -5,7 +5,7 @@
    "scripts": {
       "dev": "next dev --port 3001",
       "build": "next build",
-      "build:cloudflare": "cd ../.. && pnpm --filter @repo/database build && pnpm --filter web build && cd apps/web && npx open-next@latest build --platform cloudflare",
+      "build:cloudflare": "pnpm --filter @repo/database build && pnpm --filter @repo/ui build && pnpm --filter web build && open-next build --platform cloudflare",
       "preview:cloudflare": "wrangler pages dev .open-next --compatibility-flag=nodejs_compat",
       "deploy:cloudflare": "pnpm build:cloudflare && wrangler pages deploy .open-next --project-name=digidocs",
       "start": "open-next start",

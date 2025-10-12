@@ -1,5 +1,5 @@
 # Cloudflare Pages Configuration
-# Wrangler configuration for OpenNext + Cloudflare deployment
+# Wrangler configuration for OpenNext Cloudflare deployment
 
 name = "digidocs"
 compatibility_date = "2024-09-01"

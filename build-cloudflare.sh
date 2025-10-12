@@ -21,12 +21,12 @@ pnpm --filter @repo/ui build
 
 # Build web application
 echo "🌐 Building web application..."
-cd apps/web
-pnpm run build
+pnpm --filter web build
 
-# Adapt for Cloudflare Pages
+# Adapt for Cloudflare Pages using OpenNext
 echo "⚡ Adapting for Cloudflare Pages..."
-npx @cloudflare/next-on-pages
+cd apps/web
+npx open-next@latest build --platform cloudflare
 
 echo "✅ Build completed successfully!"
-echo "📁 Output directory: .vercel/output/static"
+echo "📁 Output directory: apps/web/.open-next"

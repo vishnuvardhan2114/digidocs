@@ -17,12 +17,12 @@ pnpm --filter @repo/ui build
 
 # Build web application
 Write-Host "🌐 Building web application..." -ForegroundColor Yellow
-Set-Location apps/web
-pnpm run build
+pnpm --filter web build
 
-# Adapt for Cloudflare Pages
+# Adapt for Cloudflare Pages using OpenNext
 Write-Host "⚡ Adapting for Cloudflare Pages..." -ForegroundColor Yellow
-npx @cloudflare/next-on-pages
+Set-Location apps/web
+npx open-next@latest build --platform cloudflare
 
 Write-Host "✅ Build completed successfully!" -ForegroundColor Green
-Write-Host "📁 Output directory: .vercel/output/static" -ForegroundColor Cyan
+Write-Host "📁 Output directory: apps/web/.open-next" -ForegroundColor Cyan
