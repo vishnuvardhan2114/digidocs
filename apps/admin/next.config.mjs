@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["ui", "@repo/database"],
+  transpilePackages: ["@repo/ui", "@repo/database"],
   images: {
     remotePatterns: [
       {
@@ -10,10 +10,6 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: '**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
       },
     ],
   },

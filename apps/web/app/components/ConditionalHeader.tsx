@@ -15,10 +15,17 @@ const ConditionalHeader = () => {
   const isServiceDetailsPage = pathname.startsWith('/services/') && 
     (pathname.includes('/document-service/') || 
      pathname.match(/\/services\/[^/]+$/));
+
+  const isBlogsPage = pathname.startsWith('/blog');
   
   // Use SimpleHeader for service details pages, Header for everything else
-  if (isServiceDetailsPage) {
-    return <SimpleHeader />;
+  if (isServiceDetailsPage || isBlogsPage) {
+    return (
+      <>
+        <SimpleHeader />
+        <div className="pt-16" />
+      </>
+    );
   }
   
   return <Header />;

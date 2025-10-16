@@ -49,7 +49,7 @@ const SimpleHeader = () => {
     }, [handleCloseMobileMenu, handleNavigateToLogin]);
 
     return (
-        <header className="bg-gray-50 border-b border-gray-200 sticky top-0 z-50">
+        <header className="bg-gray-50 border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
@@ -69,7 +69,7 @@ const SimpleHeader = () => {
                             <Link
                                 key={item.name}
                                 href={item.link}
-                                className="text-gray-700 hover:text-[#222222] font-normal text-base transition-colors"
+                                className="text-[#212325] hover:text-[#222222] font-medium text-base transition-colors"
                             >
                                 {item.name}
                             </Link>
@@ -86,7 +86,7 @@ const SimpleHeader = () => {
                             <>
                                 <button
                                     onClick={handleNavigateToLogin}
-                                    className="text-gray-700 hover:text-[#222222] font-normal text-base transition-colors"
+                                    className="text-[#212325] hover:text-[#222222] font-medium text-base transition-colors"
                                 >
                                     Login
                                 </button>
@@ -116,7 +116,7 @@ const SimpleHeader = () => {
                                     key={item.name}
                                     href={item.link}
                                     onClick={handleCloseMobileMenu}
-                                    className="text-gray-700 hover:text-[#222222] font-normal text-base transition-colors"
+                                    className="text-[#212325] hover:text-[#222222] font-normal text-base transition-colors"
                                 >
                                     {item.name}
                                 </Link>
@@ -132,7 +132,7 @@ const SimpleHeader = () => {
                                 <div className="flex flex-col gap-4">
                                     <button
                                         onClick={handleMobileLoginClick}
-                                        className="w-full text-gray-700 hover:text-[#222222] font-normal text-base py-2 transition-colors"
+                                        className="w-full text-[#212325] hover:text-[#222222] font-normal text-base py-2 transition-colors"
                                     >
                                         Login
                                     </button>

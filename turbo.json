@@ -37,6 +37,17 @@
       ],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "admin#build": {
+      "dependsOn": ["@repo/database#build", "@repo/ui#build", "^build"],
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "NEXT_PUBLIC_BETTER_AUTH_URL"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
     "@repo/database#build": {
       "dependsOn": [],
       "outputs": ["dist/**"],
