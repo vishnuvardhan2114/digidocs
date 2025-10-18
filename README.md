@@ -1,6 +1,6 @@
 # DigiDocs - Digital Document Services Platform
 
-A modern, full-stack web application for digital document services built with Next.js 15, Turborepo, and Cloudflare Pages.
+A modern, full-stack web application for digital document services built with Next.js 15 and Turborepo.
 
 ## 🏗️ Project Structure
 
@@ -27,7 +27,6 @@ digidocs/
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Animations**: [GSAP](https://greensock.com/gsap/)
 - **Package Manager**: [pnpm](https://pnpm.io/)
-- **Deployment**: [Cloudflare Pages](https://pages.cloudflare.com/) (Recommended)
 
 ## 📋 Prerequisites
 
@@ -102,7 +101,6 @@ The application will be available at `http://localhost:3001`.
 
 - `pnpm --filter web dev` - Start Next.js development server
 - `pnpm --filter web build` - Build for production
-- `pnpm --filter web build:cloudflare` - Build for Cloudflare Pages
 - `pnpm --filter web start` - Start production server
 - `pnpm --filter web lint` - Lint the web app
 
@@ -115,48 +113,9 @@ The application will be available at `http://localhost:3001`.
 
 ## 🚢 Deployment
 
-### Cloudflare Pages (Recommended)
+### Vercel
 
-This project is optimized for Cloudflare Pages deployment. Benefits include:
-
-- ✅ Unlimited bandwidth (on all plans)
-- ✅ Global CDN with 200+ locations
-- ✅ Fast cold starts (~50-150ms)
-- ✅ Generous free tier
-- ✅ Built-in DDoS protection
-- ✅ Zero code changes required
-
-#### Quick Deploy to Cloudflare
-
-1. **Install Cloudflare dependencies**:
-   ```bash
-   cd apps/web
-   pnpm add -D @cloudflare/next-on-pages vercel wrangler
-   ```
-
-2. **Push to Git** (GitHub, GitLab, or Bitbucket)
-
-3. **Deploy via Cloudflare Dashboard**:
-   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com)
-   - Workers & Pages → Create → Pages → Connect to Git
-   - Configure build settings:
-     - **Build command**: `pnpm install && pnpm turbo run build --filter=web...`
-     - **Build output**: `apps/web/.next`
-     - **Node version**: `18`
-
-4. **Set environment variables** in Cloudflare dashboard
-
-5. Click **Deploy**!
-
-For detailed instructions, see:
-- **Quick Guide**: [QUICK_START_CLOUDFLARE.md](./QUICK_START_CLOUDFLARE.md)
-- **Complete Guide**: [CLOUDFLARE_DEPLOYMENT_GUIDE.md](./CLOUDFLARE_DEPLOYMENT_GUIDE.md)
-- **Checklist**: [apps/web/CLOUDFLARE_SETUP_CHECKLIST.md](./apps/web/CLOUDFLARE_SETUP_CHECKLIST.md)
-- **Platform Comparison**: [DEPLOYMENT_COMPARISON.md](./DEPLOYMENT_COMPARISON.md)
-
-### Alternative: Vercel
-
-The project also works on Vercel (currently configured):
+The project is configured for Vercel deployment:
 
 ```bash
 # Install Vercel CLI
@@ -305,9 +264,6 @@ GOOGLE_CLIENT_SECRET           # Google OAuth client secret
 
 ## 📚 Documentation
 
-- [Cloudflare Deployment Guide](./CLOUDFLARE_DEPLOYMENT_GUIDE.md)
-- [Quick Start Guide](./QUICK_START_CLOUDFLARE.md)
-- [Platform Comparison](./DEPLOYMENT_COMPARISON.md)
 - [Database Schema Docs](./packages/database/SCHEMA_DOCS.md)
 - [Service Details Implementation](./apps/web/SERVICE_DETAILS_IMPLEMENTATION.md)
 
@@ -322,7 +278,6 @@ This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.t
 - [Neon](https://neon.tech/)
 - [Better Auth](https://www.better-auth.com/)
 - [shadcn/ui](https://ui.shadcn.com/)
-- [Cloudflare](https://www.cloudflare.com/)
 
 ---
 

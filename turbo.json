@@ -38,7 +38,7 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "admin#build": {
-      "dependsOn": ["@repo/database#build", "@repo/ui#build", "^build"],
+      "dependsOn": ["@repo/database#build", "^build"],
       "env": [
         "NODE_ENV",
         "DATABASE_URL",
@@ -52,10 +52,6 @@
       "dependsOn": [],
       "outputs": ["dist/**"],
       "env": ["NODE_ENV"]
-    },
-    "@repo/ui#build": {
-      "dependsOn": [],
-      "outputs": ["dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
